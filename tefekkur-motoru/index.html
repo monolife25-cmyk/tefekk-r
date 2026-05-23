@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sahife-i Âlem — Tefekkür Motoru</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+SC:wght@300;400&display=swap" rel="stylesheet">
+<link href="[https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+SC:wght@300;400&display=swap](https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+SC:wght@300;400&display=swap)" rel="stylesheet">
 <style>
   :root {
     --bg:        #faf7f2;
@@ -13,335 +13,101 @@
     --border2:   #e8dfc8;
     --gold:      #9a7d45;
     --gold-soft: #b89a5e;
-    --gold-pale: #d4b97a;
     --text:      #2e2416;
     --text-mid:  #5a4a2e;
     --text-soft: #8a7355;
     --text-faint:#b5a07a;
     --accent:    #6b4f2a;
 
-    /* Katman Renkleri */
-    --katman-hikmet: #846226; /* Amber tonu */
-    --katman-icaz:   #2d4a3e; /* Koyu Yeşil tonu */
-    --katman-hakikat:#5a525f; /* Mor-Gri tonu */
+    /* İstediğiniz 3 Özel Katman Rengi */
+    --katman-hikmet: #d48c00; /* Amber tonu */
+    --katman-icaz:   #1e3d30; /* Koyu Yeşil tonu */
+    --katman-hakikat:#504652; /* Mor-Gri tonu */
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); min-height: 100vh; font-family: 'Cormorant Garamond', serif; color: var(--text); line-height: 1.7; position: relative; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(ellipse 100% 50% at 50% -10%, rgba(154,125,69,0.06) 0%, transparent 60%); pointer-events: none; z-index: 0; }
+  
+  .sayfa { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 4rem 2.5rem 6rem; display: flex; flex-direction: column; gap: 2.5rem; align-items: center; }
+  .baslik-bolum { text-align: center; }
+  .bismillah { font-family: 'Amiri', serif; font-size: 2rem; color: var(--gold); margin-bottom: 1.4rem; display: block; }
+  .baslik { font-family: 'Cormorant SC', serif; font-weight: 300; font-size: clamp(1.4rem, 4vw, 2rem); letter-spacing: 0.18em; line-height: 1.5; }
+  .baslik-alt { margin-top: 0.6rem; font-style: italic; font-size: 0.95rem; color: var(--text-soft); letter-spacing: 0.1em; }
+  
+  .ayraci { width: 100%; display: flex; align-items: center; gap: 1rem; }
+  .ayraci-cizgi { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+  .ayraci-sembol { color: var(--gold-pale); font-size: 0.9rem; opacity: 0.7; letter-spacing: 0.3em; }
 
-  body {
-    background: var(--bg);
-    min-height: 100vh;
-    font-family: 'Cormorant Garamond', serif;
-    color: var(--text);
-    line-height: 1.7;
-  }
+  .kaynak { width: 100%; padding: 1.8rem 2.2rem; background: var(--bg2); border: 1px solid var(--border2); border-left: 3px solid var(--gold); }
+  .kaynak-metin { font-style: italic; font-size: 1.05rem; color: var(--text-mid); line-height: 2; margin-bottom: 0.8rem; }
+  .kaynak-imza { font-size: 0.82rem; color: var(--text-faint); letter-spacing: 0.06em; }
 
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      radial-gradient(ellipse 100% 50% at 50% -10%, rgba(154,125,69,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(154,125,69,0.04) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .sayfa {
-    position: relative;
-    z-index: 1;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 4rem 2.5rem 6rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
-  }
-
-  .baslik-bolum {
-    text-align: center;
-    animation: yukari 1s cubic-bezier(.22,.68,0,1.2) both;
-  }
-  @keyframes yukari {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .bismillah {
-    font-family: 'Amiri', serif;
-    font-size: 2rem;
-    color: var(--gold);
-    margin-bottom: 1.4rem;
-    display: block;
-    opacity: 0.9;
-  }
-
-  .baslik {
-    font-family: 'Cormorant SC', serif;
-    font-weight: 300;
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    color: var(--text);
-    letter-spacing: 0.18em;
-    line-height: 1.5;
-  }
-
-  .baslik-alt {
-    margin-top: 0.6rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: 0.95rem;
-    color: var(--text-soft);
-    letter-spacing: 0.1em;
-  }
-
-  .ayraci {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    animation: yukari 1.2s cubic-bezier(.22,.68,0,1.2) both;
-  }
-  .ayraci-cizgi {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-  }
-  .ayraci-sembol {
-    color: var(--gold-pale);
-    font-size: 0.9rem;
-    letter-spacing: 0.3em;
-    opacity: 0.7;
-  }
-
-  .kaynak {
-    width: 100%;
-    padding: 1.8rem 2.2rem;
-    background: var(--bg2);
-    border: 1px solid var(--border2);
-    border-left: 3px solid var(--gold-pale);
-    animation: yukari 1.4s cubic-bezier(.22,.68,0,1.2) both;
-  }
-
-  .kaynak-metin {
-    font-style: italic;
-    font-weight: 300;
-    font-size: 1.05rem;
-    color: var(--text-mid);
-    line-height: 2;
-    margin-bottom: 0.8rem;
-  }
-
-  .kaynak-imza {
-    font-size: 0.82rem;
-    color: var(--text-faint);
-    letter-spacing: 0.06em;
-  }
-
-  /* ── Üst Rehber Kartları ── */
-  .rehber-konteyner {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    animation: yukari 1.5s cubic-bezier(.22,.68,0,1.2) both;
-  }
-  .rehber-kart {
-    background: #fff;
-    border: 1px solid var(--border2);
-    padding: 1rem;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-  }
-  .rehber-baslik {
-    font-family: 'Cormorant SC', serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.3rem;
-  }
-  .rehber-alt {
-    font-size: 0.85rem;
-    font-style: italic;
-    color: var(--text-soft);
-  }
+  /* ── Üst Rehber İskeleti ── */
+  .rehber-konteyner { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .rehber-kart { background: #fff; border: 1px solid var(--border2); padding: 1rem; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.01); }
+  .rehber-baslik { font-family: 'Cormorant SC', serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+  .rehber-alt { font-size: 0.85rem; font-style: italic; color: var(--text-soft); }
   .rehber-kart.hikmet .rehber-baslik { color: var(--katman-hikmet); }
   .rehber-kart.icaz .rehber-baslik { color: var(--katman-icaz); }
   .rehber-kart.hakikat .rehber-baslik { color: var(--katman-hakikat); }
 
-  .giris-bolum {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    animation: yukari 1.6s cubic-bezier(.22,.68,0,1.2) both;
-  }
-
-  .giris-satir {
-    display: flex;
-    width: 100%;
-    max-width: 500px;
-    border: 1px solid var(--border);
-    background: #fff;
-    transition: border-color 0.25s, box-shadow 0.25s;
-  }
-  .giris-satir:focus-within {
-    border-color: var(--gold-soft);
-    box-shadow: 0 2px 16px rgba(154,125,69,0.1);
-  }
-
-  #nesne-giris {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 0.9rem 1.3rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    color: var(--text);
-    background: transparent;
-  }
-  #nesne-giris::placeholder {
-    color: var(--text-faint);
-    font-style: italic;
-  }
-
-  #tefekkur-btn {
-    border: none;
-    border-left: 1px solid var(--border2);
-    background: var(--bg2);
-    padding: 0 1.5rem;
-    cursor: pointer;
-    font-family: 'Cormorant SC', serif;
-    font-size: 0.78rem;
-    color: var(--gold);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    transition: background 0.2s, color 0.2s;
-  }
+  .giris-bolum { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  .giris-satir { display: flex; width: 100%; max-width: 500px; border: 1px solid var(--border); background: #fff; }
+  #nesne-giris { flex: 1; border: none; outline: none; padding: 0.9rem 1.3rem; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--text); background: transparent; }
+  #nesne-giris::placeholder { color: var(--text-faint); font-style: italic; }
+  
+  #tefekkur-btn { border: none; border-left: 1px solid var(--border2); background: var(--bg2); padding: 0 1.5rem; cursor: pointer; font-family: 'Cormorant SC', serif; font-size: 0.78rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.2s; }
   #tefekkur-btn:hover { background: var(--bg); color: var(--accent); }
-  #tefekkur-btn:disabled { opacity: 0.35; }
+  #tefekkur-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
-  #sonuc-alan {
-    width: 100%;
-    animation: yukari 1.8s cubic-bezier(.22,.68,0,1.2) both;
-  }
+  #sonuc-alan { width: 100%; }
+  .bos-hal { text-align: center; color: var(--text-faint); font-style: italic; padding: 2.5rem 1rem; }
 
-  .bos-hal {
-    text-align: center;
-    color: var(--text-faint);
-    font-style: italic;
-    font-size: 1rem;
-    padding: 2.5rem 1rem;
-  }
-
-  /* ── Katmanlı Yapı Tasarımı ── */
-  .kart {
-    width: 100%;
-    background: #fff;
-    border: 1px solid var(--border);
-    animation: acil 0.7s cubic-bezier(.22,.68,0,1.2) both;
-  }
-  @keyframes acil {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .kart-ic { padding: 2.2rem 2.6rem 1.8rem; }
-  .kart-etiket {
-    font-family: 'Cormorant SC', serif;
-    font-size: 0.68rem;
-    letter-spacing: 0.25em;
-    color: var(--text-faint);
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-  .kart-nesne-adi {
-    font-family: 'Amiri', serif;
-    font-size: 1.9rem;
-    color: var(--gold);
-    margin-bottom: 1.8rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border2);
-  }
-
-  /* Katman Ortak Stilleri */
-  .katman-bolumu {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px dashed var(--border2);
-  }
-  .katman-bolumu:last-of-type { border-bottom: none; margin-bottom: 1rem; }
+  /* ── Üç Katmanlı Görsel Çıktı Tasarımı ── */
+  .kart { width: 100%; background: #fff; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+  .kart-ic { padding: 2.5rem; }
+  .kart-etiket { font-family: 'Cormorant SC', serif; font-size: 0.68rem; letter-spacing: 0.25em; color: var(--text-faint); text-transform: uppercase; margin-bottom: 0.5rem; }
+  .kart-nesne-adi { font-family: 'Amiri', serif; font-size: 2rem; color: var(--gold); margin-bottom: 2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border2); }
   
-  .katman-rakam {
-    font-family: 'Amiri', serif;
-    font-size: 2.2rem;
-    line-height: 1;
-    font-weight: 700;
-    user-select: none;
-  }
+  .katman-bolumu { display: flex; gap: 1.8rem; margin-bottom: 2rem; padding-bottom: 1.8rem; border-bottom: 1px dashed var(--border2); }
+  .katman-bolumu:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  
+  /* Soluna Arap Rakamları */
+  .katman-rakam { font-family: 'Amiri', serif; font-size: 2.5rem; line-height: 1; font-weight: 700; user-select: none; pt: 0.2rem; }
   .katman-icerik { flex: 1; }
+  .katman-baslik-satiri { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.6rem; }
+  .katman-baslik { font-family: 'Cormorant SC', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.05em; }
   
-  .katman-baslik-satiri {
-    display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
-  }
-  .katman-baslik {
-    font-family: 'Cormorant SC', serif;
-    font-size: 1.15rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-  }
-  .katman-soru {
-    font-size: 0.95rem;
-    font-style: italic;
-    color: var(--text-soft);
-  }
-  .katman-metin {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    line-height: 1.9;
-    color: var(--text);
-  }
+  /* Soru İfadesi Başlığın Yanında İtalik */
+  .katman-soru { font-size: 0.95rem; font-style: italic; color: var(--text-soft); }
+  .katman-metin { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; line-height: 1.8; color: var(--text); text-align: justify; }
 
-  /* Katman Renk Dağılımları */
+  /* Renklerin Katmanlara Göre Ayrışması */
   .katman-hikmet .katman-rakam, .katman-hikmet .katman-baslik { color: var(--katman-hikmet); }
   .katman-icaz .katman-rakam, .katman-icaz .katman-baslik { color: var(--katman-icaz); }
   .katman-hakikat .katman-rakam, .katman-hakikat .katman-baslik { color: var(--katman-hakikat); }
 
-  .kart-alt {
-    margin-top: 1.6rem;
-    padding-top: 1.2rem;
-    border-top: 1px solid var(--border2);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .kart-muhur { font-family: 'Amiri', serif; font-style: italic; font-size: 0.85rem; color: var(--text-faint); }
-  .paylas-btn {
-    display: flex; align-items: center; gap: 0.45rem; background: none; border: 1px solid var(--border);
-    padding: 0.4rem 1rem; cursor: pointer; font-family: 'Cormorant SC', serif; font-size: 0.72rem; color: var(--text-soft); text-transform: uppercase; transition: all 0.2s;
-  }
-  .paylas-btn:hover { border-color: var(--gold-soft); color: var(--gold); background: var(--bg2); }
+  .kart-alt { margin-top: 2rem; padding-top: 1.2rem; border-top: 1px solid var(--border2); display: flex; justify-content: space-between; align-items: center; }
+  .kart-muhur { font-family: 'Amiri', serif; font-style: italic; font-size: 0.9rem; color: var(--text-faint); }
+  
+  /* Paylaş Butonu */
+  .paylas-btn { display: flex; align-items: center; gap: 0.5rem; background: none; border: 1px solid var(--border); padding: 0.5rem 1.2rem; cursor: pointer; font-family: 'Cormorant SC', serif; font-size: 0.75rem; color: var(--text-soft); text-transform: uppercase; transition: all 0.2s; }
+  .paylas-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--bg2); }
 
-  /* Yükleniyor */
-  .yukleniyor { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; padding: 3rem; }
-  .noktalar { display: flex; gap: 7px; }
-  .nokta { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-pale); animation: nefes 1.6s ease-in-out infinite; }
-  .nokta:nth-child(2) { animation-delay: 0.25s; }
-  .nokta:nth-child(3) { animation-delay: 0.5s; }
-  @keyframes nefes { 0%, 100% { opacity: 0.2; transform: scale(0.7); } 50% { opacity: 0.9; transform: scale(1.2); } }
-  .yukleniyor-yazi { font-style: italic; color: var(--text-soft); font-size: 0.95rem; }
+  /* Yükleniyor Animasyonu */
+  .yukleniyor { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; padding: 4rem; }
+  .noktalar { display: flex; gap: 8px; }
+  .nokta { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: nefes 1.5s infinite ease-in-out; }
+  .nokta:nth-child(2) { animation-delay: 0.2s; }
+  .nokta:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes nefes { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+  .yukleniyor-yazi { font-style: italic; color: var(--text-soft); }
 
-  .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(8px); background: var(--text); color: var(--bg); padding: 0.65rem 1.4rem; font-family: 'Cormorant Garamond', serif; font-size: 0.92rem; font-style: italic; opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none; z-index: 100; }
+  .toast { position: fixed; bottom: 2.5rem; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--text); color: var(--bg); padding: 0.7rem 1.5rem; font-size: 0.95rem; font-style: italic; opacity: 0; transition: all 0.3s ease; z-index: 100; pointer-events: none; }
   .toast.goster { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .hata { padding: 1.5rem 2rem; background: #fff8f5; border: 1px solid #e8c8b8; border-left: 3px solid #c87850; font-style: italic; color: #7a4a2a; font-size: 0.95rem; }
-  .alt-bilgi { text-align: center; font-style: italic; font-weight: 300; font-size: 0.9rem; color: var(--text-faint); line-height: 1.9; animation: yukari 2s cubic-bezier(.22,.68,0,1.2) both; }
-  @media (max-width: 600px) { .rehber-konteyner { grid-template-columns: 1fr; gap: 0.5rem; } .sayfa { padding: 2rem 1.2rem; } .kart-ic { padding: 1.5rem; } .katman-bolumu { gap: 1rem; } }
+  .hata { padding: 1.5rem; background: #fff5f5; border: 1px solid #ecc; border-left: 3px solid #c55; color: #a44; font-style: italic; }
+  @media(max-width:600px){ .rehber-konteyner{ grid-template-columns: 1fr; gap:0.5rem; } .sayfa{ padding:2rem 1rem; } .kart-ic{ padding:1.5rem; } .katman-bolumu { flex-direction: row; gap: 1rem; } }
 </style>
 </head>
 <body>
@@ -349,8 +115,8 @@
 <div class="sayfa">
   <div class="baslik-bolum">
     <span class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</span>
-    <div class="baslik">Sahife-i Âlem<br>Tefekkür Motoru</div>
-    <div class="baslik-alt">Mesnevi-i Nuriye &nbsp;·&nbsp; Bediüzzaman Said Nursî</div>
+    <h1 class="baslik">Sahife-i Âlem<br>Tefekkür Motoru</h1>
+    <div class="baslik-alt">Mesnevi-i Nuriye Ekseninde Arındırılmış Okumalar</div>
   </div>
 
   <div class="ayraci">
@@ -361,13 +127,12 @@
 
   <div class="kaynak">
     <div class="kaynak-metin">
-      "Sahife-i âlemin eb'âd-ı vâsiasında Nakkaş-ı Ezelî'nin yazdığı silsile-i hâdisâtın
-      satırlarına hikmet nazarıyla bak ve fikr-i hakikatle sarıl..."
+      "Sahife-i âlemin eb'âd-ı vâsiasında Nakkaş-ı Ezelî'nin yazdığı silsile-i hâdisâtın satırlarına hikmet nazarıyla bak ve fikr-i hakikatle sarıl..."
     </div>
     <div class="kaynak-imza">— Bediüzzaman Said Nursî, Mesnevi-i Nuriye</div>
   </div>
 
-  <!-- ── Üst Rehber Paneli ── -->
+  <!-- Üst Rehber İskeleti -->
   <div class="rehber-konteyner">
     <div class="rehber-kart hikmet">
       <div class="rehber-baslik">Hikmet Nazarıyla</div>
@@ -385,61 +150,62 @@
 
   <div class="giris-bolum">
     <div class="giris-satir">
-      <input type="text" id="nesne-giris" placeholder="su, yaprak, güneş, göz, kar tanesi..." autocomplete="off" spellcheck="false" />
+      <input type="text" id="nesne-giris" placeholder="Örn: su, yaprak, güneş, göz, kar tanesi..." autocomplete="off">
       <button id="tefekkur-btn">Tefekkür Et</button>
     </div>
   </div>
 
   <div id="sonuc-alan">
-    <div class="bos-hal">✦ &nbsp; Bir varlık yazın, üç derin katmanda satırlarını okuyalım &nbsp; ✦</div>
-  </div>
-
-  <div class="alt-bilgi">
-    "Her şey Hak'tan gelir, Hak'a döner."<br>
-    Kâinattaki her varlık, Nakkaş-ı Ezelî'nin üç katmanlı bir mektubudur.
+    <div class="bos-hal">✦ &nbsp; Bir varlık yazıp tefekkür butonuna basınız &nbsp; ✦</div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const btn   = document.getElementById('tefekkur-btn');
+const btn = document.getElementById('tefekkur-btn');
 const input = document.getElementById('nesne-giris');
-const alan  = document.getElementById('sonuc-alan');
-let sonTefekkur Verisi = null;
+const alan = document.getElementById('sonuc-alan');
+let sonVeri = null;
 
 async function tefekkurEt() {
   const nesne = input.value.trim();
-  if (!nesne) { input.focus(); return; }
+  if(!nesne) return;
 
   btn.disabled = true;
   alan.innerHTML = `
     <div class="yukleniyor">
       <div class="noktalar"><div class="nokta"></div><div class="nokta"></div><div class="nokta"></div></div>
-      <div class="yukleniyor-yazi">Sahife-i Âlem'deki üç derin katman okunuyor…</div>
+      <div class="yukleniyor-yazi">Mânâ katmanları çözülüyor, lütfen bekleyiniz...</div>
     </div>`;
 
   try {
-    const res = await fetch("/api/tefekkur", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nesne: nesne })
+    const res = await fetch('/api/tefekkur', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nesne })
     });
 
-    if (!res.ok) throw new Error("Sunucu yanıt vermedi.");
-    const veri = await res.json();
-    
-    // Backend'den gelen JSON string'i parse ediyoruz
-    const katmanlar = typeof veri.metin === 'string' ? JSON.parse(veri.metin) : veri.metin;
-    sonTefekkurVerisi = { nesne, ...katmanlar };
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Bağlantı hatası.');
+
+    // Claude'dan bazen ```json ... ``` şeklinde gelebilen metni tamamen temizleme garantisi
+    let temizMetin = data.metin.trim();
+    if (temizMetin.startsWith("```")) {
+      temizMetin = temizMetin.replace(/^
+```json/, "").replace(/^```/, "").replace(/```$/, "").trim();
+    }
+
+    const json = JSON.parse(temizMetin);
+    sonVeri = { nesne, ...json };
 
     alan.innerHTML = `
       <div class="kart">
         <div class="kart-ic">
-          <div class="kart-etiket">Sahife-i Âlem'deki Mektup</div>
-          <div class="kart-nesne-adi">${gv(nesne)}</div>
-          
-          <!-- Katman 1: Hikmet -->
+          <div class="kart-etiket">Kâinat Kitabından Bir Yaprak</div>
+          <div class="kart-nesne-adi">${nesne}</div>
+
+          <!-- Katman 1 -->
           <div class="katman-bolumu katman-hikmet">
             <div class="katman-rakam">١</div>
             <div class="katman-icerik">
@@ -447,11 +213,11 @@ async function tefekkurEt() {
                 <span class="katman-baslik">Hikmet Nazarıyla</span>
                 <span class="katman-soru">/ Neden var?</span>
               </div>
-              <div class="katman-metin">${gv(katmanlar.hikmet)}</div>
+              <div class="katman-metin">${json.hikmet}</div>
             </div>
           </div>
 
-          <!-- Katman 2: İ'caz -->
+          <!-- Katman 2 -->
           <div class="katman-bolumu katman-icaz">
             <div class="katman-rakam">٢</div>
             <div class="katman-icerik">
@@ -459,11 +225,11 @@ async function tefekkurEt() {
                 <span class="katman-baslik">Kudret & I'caz</span>
                 <span class="katman-soru">/ Nasıl çalışıyor?</span>
               </div>
-              <div class="katman-metin">${gv(katmanlar.icaz)}</div>
+              <div class="katman-metin">${json.icaz}</div>
             </div>
           </div>
 
-          <!-- Katman 3: Hakikat -->
+          <!-- Katman 3 -->
           <div class="katman-bolumu katman-hakikat">
             <div class="katman-rakam">٣</div>
             <div class="katman-icerik">
@@ -471,61 +237,42 @@ async function tefekkurEt() {
                 <span class="katman-baslik">Fikr-i Hakikatle</span>
                 <span class="katman-soru">/ Kimin adına?</span>
               </div>
-              <div class="katman-metin">${gv(katmanlar.hakikat)}</div>
+              <div class="katman-metin">${json.hakikat}</div>
             </div>
           </div>
 
           <div class="kart-alt">
-            <div class="kart-muhur">✦ &nbsp;Nakkaş-ı Ezelî'nin üçlü mühüründen</div>
-            <button class="paylas-btn" onclick="paylasTefekkur()">Paylaş</button>
+            <div class="kart-muhur">✦ &nbsp; Sırr-ı Ehadiyet Mührü</div>
+            <button class="paylas-btn" onclick="paylas()">Metni Paylaş</button>
           </div>
         </div>
       </div>`;
-  } catch (e) {
-    alan.innerHTML = `<div class="hata">Mektup okunurken bir hata oluştu. Lütfen tekrar deneyiniz.<br><small style="opacity:0.6">${gv(String(e))}</small></div>`;
+  } catch(e) {
+    console.error(e);
+    alan.innerHTML = `<div class="hata">Mânâ ayrıştırılırken bir hata oluştu: ${e.message}</div>`;
   } finally {
     btn.disabled = false;
   }
 }
 
-async function paylasTefekkur() {
-  if (!sonTefekkurVerisi) return;
-
-  const paylasTamMetin =
-    `✦ Sahife-i Âlem — "${sonTefekkurVerisi.nesne}" Üzerine Üç Katmanlı Tefekkür ✦\n\n` +
-    `١. HİKMET NAZARIYLA (Neden var?):\n${sonTefekkurVerisi.hikmet}\n\n` +
-    `٢. KUDRET & I'CAZ (Nasıl çalışıyor?):\n${sonTefekkurVerisi.icaz}\n\n` +
-    `٣. FİKR-İ HAKİKATLE (Kimin adına?):\n${sonTefekkurVerisi.hakikat}\n\n` +
-    `— Mesnevi-i Nuriye Ekseninde`;
-
-  if (navigator.share) {
-    try {
-      await navigator.share({ title: `Sahife-i Âlem — ${sonTefekkurVerisi.nesne}`, text: paylasTamMetin });
-      return;
-    } catch (e) { if (e.name === 'AbortError') return; }
-  }
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    try {
-      await navigator.clipboard.writeText(paylasTamMetin);
-      toastGoster('Üç katmanlı tefekkür panoya kopyalandı ✦');
-      return;
-    } catch (e) {}
-  }
-}
-
-function toastGoster(mesaj) {
-  const t = document.getElementById('toast');
-  t.textContent = mesaj; t.classList.add('goster');
-  setTimeout(() => t.classList.remove('goster'), 2800);
-}
-
-function gv(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function paylas() {
+  if(!sonVeri) return;
+  const metin = `✦ Sahife-i Âlem — "${sonVeri.nesne}" Tefekkürü ✦\n\n` +
+                `١. HİKMET NAZARIYLA (Neden var?):\n${sonVeri.hikmet}\n\n` +
+                `٢. KUDRET & I'CAZ (Nasıl çalışıyor?):\n${sonVeri.icaz}\n\n` +
+                `٣. FİKR-İ HAKİKATLE (Kimin adına?):\n${sonVeri.hakikat}\n\n` +
+                `— Mesnevi-i Nuriye Üslubunca`;
+                
+  navigator.clipboard.writeText(metin).then(() => {
+    const t = document.getElementById('toast');
+    t.textContent = "Üç katmanlı tefekkür panoya kopyalandı! ✦";
+    t.classList.add('goster');
+    setTimeout(() => t.classList.remove('goster'), 2500);
+  });
 }
 
 btn.addEventListener('click', tefekkurEt);
-input.addEventListener('keydown', e => { if (e.key === 'Enter') tefekkurEt(); });
+input.addEventListener('keydown', (e) => { if(e.key === 'Enter') tefekkurEt(); });
 </script>
 </body>
 </html>

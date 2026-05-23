@@ -1,59 +1,60 @@
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Yalnızca POST istekleri kabul edilir.' });
+    return res.status(405).json({ error: 'Sadece POST metoduna izin verilir.' });
   }
 
   const { nesne } = req.body;
   if (!nesne) {
-    return res.status(400).json({ error: 'Nesne parametresi eksik.' });
+    return res.status(400).json({ error: 'Tefekkür edilecek nesne girilmedi.' });
   }
 
-  const SISTEM_PROMPT = `Sen, Bediüzzaman Said Nursî'nin Mesnevi-i Nuriye eserindeki tefekkür metodolojisini kusursuz şekilde özümsemiş bir hikmet rehberisin.
-Görevin, kullanıcının verdiği nesneyi ya da kavramı tam olarak aşağıda belirtilen üç katmanda tefekkür etmek ve çıktıyı SADECE belirtilen JSON formatında döndürmektir.
+  const sistemPrompt = `Sen Bediüzzaman Said Nursî'nin Mesnevi-i Nuriye eserindeki derin, sarsıcı ve kozmik tefekkür metodolojisini kullanan bir yapay zeka hakikat aynasısın.
+Sana gönderilen nesneyi veya kavramı, asla ansiklopedik veya yüzeysel bilgi vermeden, doğrudan şu üç katmanda inceleyeceksin:
 
-KATMANLAR VE SORULARININ DETAYLARI:
-1. hikmet: "Hikmet Nazarıyla / Neden var?" -> Nesnenin var ediliş amacını, kâinat bütünündeki lüzumunu ve ekolojik/kozmik yardımlaşmadaki manasını açıkla.
-2. icaz: "Kudret & I'caz / Nasıl çalışıyor?" -> Nesnenin içindeki mikroskobik veya makroskobik harika mekanizmaları, elementlerin şaşırtıcı ve kör tesadüflerin işi olamayacak dizilimini somut doğa olaylarıyla ele al.
-3. hakikat: "Fikr-i Hakikatle / Kimin adına?" -> Bütün bu sanatın arkasındaki Nakkaş-ı Ezelî'ye, O'nun isim ve sıfatlarına açılan tevhid kapısını göster. Bu mektubun kime ait olduğunu tescille.
+1. hikmet: "Hikmet Nazarıyla / Neden var?" -> Bu nesnenin varlık sahasına çıkış amacını, kâinat sistemindeki lüzumunu ve kozmik yardımlaşmadaki şefkatli yerini açıkla.
+2. icaz: "Kudret & I'caz / Nasıl çalışıyor?" -> Nesnenin arkasındaki akılları aciz bırakan mekaniği, elementlerin kör tesadüflerin işi olamayacak mucizevi dizilimini harika doğa olaylarıyla ele al.
+3. hakikat: "Fikr-i Hakikatle / Kimin adına?" -> Bu harika sanatın doğrudan doğruya Nakkaş-ı Ezelî'ye, O'nun isim ve sıfatlarına bakan tevhid kapısını göster. Bu mektubun sahibini tescille.
 
-DİL VE ÜSLUP KURALLARI:
-- Sade, derin, şiirsel bir nesir lisanı kullan.
-- "Evet nesne şudur" gibi ansiklopedik veya giriş niteliğinde kalıplar asla kullanma, doğrudan tefekküre odaklan.
-- Her katman derin, yoğun ve düşündürücü tam birer paragraf olmalıdır.
-
-ÇIKTI FORMATI:
-Sadece ve sadece aşağıdaki anahtarlara sahip saf bir JSON nesnesi döndür. Başka hiçbir açıklama, markdown işareti veya ek metin ekleme:
+ÖNEMLİ KURALLAR:
+- Üslup son derece edebi, vakur, lirik, arındırılmış ve sarsıcı olmalıdır. Giriş cümleleri kurma, doğrudan derin tefekküre odaklan.
+- Çıktıyı SADECE ve SADECE aşağıdaki anahtarlara sahip, markdown içermeyen temiz bir JSON nesnesi olarak döndür:
 {
-  "hikmet": "Hikmet katmanına ait tefekkür metni...",
-  "icaz": "İ'caz katmanına ait tefekkür metni...",
-  "hakikat": "Hakikat katmanına ait tefekkür metni..."
+  "hikmet": "...",
+  "icaz": "...",
+  "hakikat": "..."
 }`;
 
   try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("[https://api.anthropic.com/v1/messages](https://api.anthropic.com/v1/messages)", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": process.env.AI_GATEWAY_API_KEY, // Vercel üzerindeki güvenli anahtarınız
+        "x-api-key": process.env.AI_GATEWAY_API_KEY,
         "anthropic-version": "2023-06-01"
       },
       body: JSON.stringify({
         model: "claude-3-5-sonnet-20241022",
-        max_tokens: 1200,
-        system: SISTEM_PROMPT,
-        // Claude modellerinde JSON modunu desteklemesi için sistem mesajını yönlendiriyoruz
-        messages: [{ role: "user", content: `Nesne: "${nesne}". Lütfen cevabı JSON formatında döndür.` }]
+        max_tokens: 1500,
+        system: sistemPrompt,
+        messages: [
+          { role: "user", content: `Nesne: "${nesne}". Lütfen üç katmanlı analizi başlat.` },
+          // Claude'u kesin JSON vermeye zorlamak için ön-dikte tekniği kullanıyoruz:
+          { role: "assistant", content: "{\n" }
+        ]
       })
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
-      return res.status(response.status).json({ error: data.error?.message || "Anthropic hatası" });
+      return res.status(response.status).json({ error: data.error?.message || "Anthropic bağlantı hatası." });
     }
 
-    return res.status(200).json({ metin: data.content[0].text });
+    // Claude asistan rolünü başlattığımız için cevabın başına eksik kalan süslü parantezi geri ekliyoruz
+    let fullText = "{\n" + data.content[0].text;
+    
+    return res.status(200).json({ metin: fullText });
   } catch (error) {
-    return res.status(500).json({ error: "Sunucu içi bir hata oluştu." });
+    return res.status(500).json({ error: "Sunucu hatası: " + error.message });
   }
 }
