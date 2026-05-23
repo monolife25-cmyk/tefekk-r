@@ -19,10 +19,9 @@
     --text-faint:#b5a07a;
     --accent:    #6b4f2a;
 
-    /* İstediğiniz 3 Özel Katman Rengi */
-    --katman-hikmet: #d48c00; /* Amber tonu */
-    --katman-icaz:   #1e3d30; /* Koyu Yeşil tonu */
-    --katman-hakikat:#504652; /* Mor-Gri tonu */
+    --katman-hikmet: #d48c00; 
+    --katman-icaz:   #1e3d30; 
+    --katman-hakikat:#504652; 
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,13 +36,12 @@
   
   .ayraci { width: 100%; display: flex; align-items: center; gap: 1rem; }
   .ayraci-cizgi { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
-  .ayraci-sembol { color: var(--gold-pale); font-size: 0.9rem; opacity: 0.7; letter-spacing: 0.3em; }
+  .ayraci-sembol { color: var(--gold); font-size: 0.9rem; opacity: 0.7; letter-spacing: 0.3em; }
 
   .kaynak { width: 100%; padding: 1.8rem 2.2rem; background: var(--bg2); border: 1px solid var(--border2); border-left: 3px solid var(--gold); }
   .kaynak-metin { font-style: italic; font-size: 1.05rem; color: var(--text-mid); line-height: 2; margin-bottom: 0.8rem; }
   .kaynak-imza { font-size: 0.82rem; color: var(--text-faint); letter-spacing: 0.06em; }
 
-  /* ── Üst Rehber İskeleti ── */
   .rehber-konteyner { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
   .rehber-kart { background: #fff; border: 1px solid var(--border2); padding: 1rem; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.01); }
   .rehber-baslik { font-family: 'Cormorant SC', serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
@@ -59,12 +57,10 @@
   
   #tefekkur-btn { border: none; border-left: 1px solid var(--border2); background: var(--bg2); padding: 0 1.5rem; cursor: pointer; font-family: 'Cormorant SC', serif; font-size: 0.78rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.2s; }
   #tefekkur-btn:hover { background: var(--bg); color: var(--accent); }
-  #tefekkur-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
   #sonuc-alan { width: 100%; }
   .bos-hal { text-align: center; color: var(--text-faint); font-style: italic; padding: 2.5rem 1rem; }
 
-  /* ── Üç Katmanlı Görsel Çıktı Tasarımı ── */
   .kart { width: 100%; background: #fff; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
   .kart-ic { padding: 2.5rem; }
   .kart-etiket { font-family: 'Cormorant SC', serif; font-size: 0.68rem; letter-spacing: 0.25em; color: var(--text-faint); text-transform: uppercase; margin-bottom: 0.5rem; }
@@ -73,17 +69,14 @@
   .katman-bolumu { display: flex; gap: 1.8rem; margin-bottom: 2rem; padding-bottom: 1.8rem; border-bottom: 1px dashed var(--border2); }
   .katman-bolumu:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   
-  /* Soluna Arap Rakamları */
-  .katman-rakam { font-family: 'Amiri', serif; font-size: 2.5rem; line-height: 1; font-weight: 700; user-select: none; pt: 0.2rem; }
+  .katman-rakam { font-family: 'Amiri', serif; font-size: 2.5rem; line-height: 1; font-weight: 700; user-select: none; }
   .katman-icerik { flex: 1; }
   .katman-baslik-satiri { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.6rem; }
   .katman-baslik { font-family: 'Cormorant SC', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.05em; }
   
-  /* Soru İfadesi Başlığın Yanında İtalik */
   .katman-soru { font-size: 0.95rem; font-style: italic; color: var(--text-soft); }
   .katman-metin { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; line-height: 1.8; color: var(--text); text-align: justify; }
 
-  /* Renklerin Katmanlara Göre Ayrışması */
   .katman-hikmet .katman-rakam, .katman-hikmet .katman-baslik { color: var(--katman-hikmet); }
   .katman-icaz .katman-rakam, .katman-icaz .katman-baslik { color: var(--katman-icaz); }
   .katman-hakikat .katman-rakam, .katman-hakikat .katman-baslik { color: var(--katman-hakikat); }
@@ -91,11 +84,9 @@
   .kart-alt { margin-top: 2rem; padding-top: 1.2rem; border-top: 1px solid var(--border2); display: flex; justify-content: space-between; align-items: center; }
   .kart-muhur { font-family: 'Amiri', serif; font-style: italic; font-size: 0.9rem; color: var(--text-faint); }
   
-  /* Paylaş Butonu */
   .paylas-btn { display: flex; align-items: center; gap: 0.5rem; background: none; border: 1px solid var(--border); padding: 0.5rem 1.2rem; cursor: pointer; font-family: 'Cormorant SC', serif; font-size: 0.75rem; color: var(--text-soft); text-transform: uppercase; transition: all 0.2s; }
   .paylas-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--bg2); }
 
-  /* Yükleniyor Animasyonu */
   .yukleniyor { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; padding: 4rem; }
   .noktalar { display: flex; gap: 8px; }
   .nokta { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: nefes 1.5s infinite ease-in-out; }
@@ -132,7 +123,6 @@
     <div class="kaynak-imza">— Bediüzzaman Said Nursî, Mesnevi-i Nuriye</div>
   </div>
 
-  <!-- Üst Rehber İskeleti -->
   <div class="rehber-konteyner">
     <div class="rehber-kart hikmet">
       <div class="rehber-baslik">Hikmet Nazarıyla</div>
@@ -170,9 +160,11 @@ let sonVeri = null;
 
 async function tefekkurEt() {
   const nesne = input.value.trim();
-  if(!nesne) return;
+  if(!nesne) {
+    alert("Lütfen tefekkür edilecek bir varlık ismi yazın.");
+    return;
+  }
 
-  btn.disabled = true;
   alan.innerHTML = `
     <div class="yukleniyor">
       <div class="noktalar"><div class="nokta"></div><div class="nokta"></div><div class="nokta"></div></div>
@@ -189,12 +181,19 @@ async function tefekkurEt() {
     const data = await res.json();
     if(!res.ok) throw new Error(data.error || 'Bağlantı hatası.');
 
-    // Claude'dan bazen ```json ... ``` şeklinde gelebilen metni tamamen temizleme garantisi
     let temizMetin = data.metin.trim();
-    if (temizMetin.startsWith("```")) {
-      temizMetin = temizMetin.replace(/^
-```json/, "").replace(/^```/, "").replace(/```$/, "").trim();
+    
+    // Hatalı düzenli ifadeler yerine güvenli düz metin temizliği
+    if (temizMetin.indexOf("```json") === 0) {
+      temizMetin = temizMetin.substring(7);
+    } else if (temizMetin.indexOf("```") === 0) {
+      temizMetin = temizMetin.substring(3);
     }
+    if (temizMetin.endsWith("
+```")) {
+      temizMetin = temizMetin.substring(0, temizMetin.length - 3);
+    }
+    temizMetin = temizMetin.trim();
 
     const json = JSON.parse(temizMetin);
     sonVeri = { nesne, ...json };
@@ -205,7 +204,6 @@ async function tefekkurEt() {
           <div class="kart-etiket">Kâinat Kitabından Bir Yaprak</div>
           <div class="kart-nesne-adi">${nesne}</div>
 
-          <!-- Katman 1 -->
           <div class="katman-bolumu katman-hikmet">
             <div class="katman-rakam">١</div>
             <div class="katman-icerik">
@@ -217,7 +215,6 @@ async function tefekkurEt() {
             </div>
           </div>
 
-          <!-- Katman 2 -->
           <div class="katman-bolumu katman-icaz">
             <div class="katman-rakam">٢</div>
             <div class="katman-icerik">
@@ -229,7 +226,6 @@ async function tefekkurEt() {
             </div>
           </div>
 
-          <!-- Katman 3 -->
           <div class="katman-bolumu katman-hakikat">
             <div class="katman-rakam">٣</div>
             <div class="katman-icerik">
@@ -250,8 +246,6 @@ async function tefekkurEt() {
   } catch(e) {
     console.error(e);
     alan.innerHTML = `<div class="hata">Mânâ ayrıştırılırken bir hata oluştu: ${e.message}</div>`;
-  } finally {
-    btn.disabled = false;
   }
 }
 
