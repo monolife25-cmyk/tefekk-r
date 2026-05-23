@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sahife-i Âlem — Tefekkür Motoru</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+SC:wght@300;400&display=swap" rel="stylesheet">
+<link href="[https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+SC:wght@300;400&display=swap](https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+SC:wght@300;400&display=swap)" rel="stylesheet">
 <style>
   :root {
     --bg:        #faf7f2;
@@ -36,7 +36,7 @@
   
   .ayraci { width: 100%; display: flex; align-items: center; gap: 1rem; }
   .ayraci-cizgi { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
-  .ayraci-sembol { color: var(--gold-pale); font-size: 0.9rem; opacity: 0.7; letter-spacing: 0.3em; }
+  .ayraci-sembol { color: var(--gold); font-size: 0.9rem; opacity: 0.7; letter-spacing: 0.3em; }
 
   .kaynak { width: 100%; padding: 1.8rem 2.2rem; background: var(--bg2); border: 1px solid var(--border2); border-left: 3px solid var(--gold); }
   .kaynak-metin { font-style: italic; font-size: 1.05rem; color: var(--text-mid); line-height: 2; margin-bottom: 0.8rem; }
@@ -55,7 +55,6 @@
   #nesne-giris { flex: 1; border: none; outline: none; padding: 0.9rem 1.3rem; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--text); background: transparent; }
   #nesne-giris::placeholder { color: var(--text-faint); font-style: italic; }
   
-  /* Buton burada varsayılan olarak tamamen aktif ve tıklanabilir */
   #tefekkur-btn { border: none; border-left: 1px solid var(--border2); background: var(--bg2); padding: 0 1.5rem; cursor: pointer; font-family: 'Cormorant SC', serif; font-size: 0.78rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.2s; }
   #tefekkur-btn:hover { background: var(--bg); color: var(--accent); }
 
@@ -166,7 +165,6 @@ async function tefekkurEt() {
     return;
   }
 
-  // Arama başladığı an animasyon tetikleniyor
   alan.innerHTML = `
     <div class="yukleniyor">
       <div class="noktalar"><div class="nokta"></div><div class="nokta"></div><div class="nokta"></div></div>
@@ -184,10 +182,18 @@ async function tefekkurEt() {
     if(!res.ok) throw new Error(data.error || 'Bağlantı hatası.');
 
     let temizMetin = data.metin.trim();
-    if (temizMetin.startsWith("```")) {
-      temizMetin = temizMetin.replace(/^
-```json/, "").replace(/^```/, "").replace(/```$/, "").trim();
+    
+    // Hatalı düzenli ifadeler yerine güvenli düz metin temizliği
+    if (temizMetin.indexOf("```json") === 0) {
+      temizMetin = temizMetin.substring(7);
+    } else if (temizMetin.indexOf("```") === 0) {
+      temizMetin = temizMetin.substring(3);
     }
+    if (temizMetin.endsWith("
+```")) {
+      temizMetin = temizMetin.substring(0, temizMetin.length - 3);
+    }
+    temizMetin = temizMetin.trim();
 
     const json = JSON.parse(temizMetin);
     sonVeri = { nesne, ...json };
@@ -259,7 +265,6 @@ function paylas() {
   });
 }
 
-// Doğrudan tıklama ve Enter olaylarını bağlıyoruz
 btn.addEventListener('click', tefekkurEt);
 input.addEventListener('keydown', (e) => { if(e.key === 'Enter') tefekkurEt(); });
 </script>
